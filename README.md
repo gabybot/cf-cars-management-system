@@ -88,6 +88,8 @@ Primero, crea un archivo llamado `Dockerfile` en la raíz del proyecto con el si
 ```Dockerfile
 FROM node:18-alpine
 LABEL org.opencontainers.image.authors="RoxsRoss"
+RUN apk add --update python3 make g++\
+   && rm -rf /var/cache/apk/*
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
