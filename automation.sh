@@ -33,13 +33,6 @@ check_tools(){
 
 check_tools docker
 
-####leer version de la aplicacion
-
-if [ -f "package.json" ]; then
-    APP_VERSION=$(jq -r '.version' package.json)
-    print_message $YELLOW "Versión de la aplicación: $APP_VERSION"
-fi
-
 #eliminar antiguos contenedores en ejecucion
 print_message $YELLOW "Eliminando contenedores antiguos..."
 docker rm -f $CONTAINER_NAME &>/dev/null || true
@@ -67,6 +60,12 @@ COPY . .
 EXPOSE $PORT
 CMD ["npm", "start"]
 EOF
+
+####leer version de la aplicacion
+if [ -f "$TEMP_DIR/package.json" ]; then
+    APP_VERSION=$(jq -r '.version' package.json)
+    print_message $YELLOW "Versión de la aplicación: $APP_VERSION"
+fi
 
 #crear docker image
 print_message $YELLOW "Construyendo imagen Docker..."
