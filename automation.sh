@@ -24,9 +24,9 @@ print_message() {
 
 check_tools(){
     if command -v $1 &>/dev/null; then 
-        print_message $GREEN "Docker está instalado."
+        print_message $GREEN "$1 está instalado."
     else 
-        print_message $RED "Docker no está instalado. Por favor, instale Docker e intente nuevamente."
+        print_message $RED "$1 no está instalado. Por favor, instale $1 e intente nuevamente."
         exit 1
     fi
 }
